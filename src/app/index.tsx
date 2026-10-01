@@ -17,6 +17,7 @@ import { ThemedView } from '@/components/themed-view';
 import { ChatBubble } from '@/components/chat/ChatBubble';
 import { ChatInput, QuickPromptChips } from '@/components/chat/ChatInput';
 import { AiSettingsModal } from '@/components/settings/AiSettingsModal';
+import { ThemeSettingsModal } from '@/components/settings/ThemeSettingsModal';
 import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { useAiConfig } from '@/contexts/AiConfigContext';
@@ -31,6 +32,7 @@ export default function HomeScreen() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [settingsVisible, setSettingsVisible] = useState(false);
+  const [themeVisible, setThemeVisible] = useState(false);
   const [historyLoaded, setHistoryLoaded] = useState(false);
 
   const flatListRef = useRef<FlatList<ChatMessage>>(null);
@@ -214,6 +216,16 @@ export default function HomeScreen() {
             )}
 
             <Pressable
+              onPress={() => setThemeVisible(true)}
+              style={({ pressed }) => [styles.iconButton, pressed && styles.pressed]}>
+              <SymbolView
+                name={{ ios: 'paintpalette.fill', android: 'palette', web: 'palette' }}
+                size={20}
+                tintColor={theme.text}
+              />
+            </Pressable>
+
+            <Pressable
               onPress={() => setSettingsVisible(true)}
               style={({ pressed }) => [styles.iconButton, pressed && styles.pressed]}>
               <SymbolView
@@ -332,6 +344,9 @@ export default function HomeScreen() {
           visible={settingsVisible}
           onClose={() => setSettingsVisible(false)}
         />
+
+        {/* Theme Modal */}
+        <ThemeSettingsModal visible={themeVisible} onClose={() => setThemeVisible(false)} />
       </SafeAreaView>
     </ThemedView>
   );

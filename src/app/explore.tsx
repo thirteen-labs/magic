@@ -106,6 +106,15 @@ export default function TabTwoScreen() {
             </ThemedText>
           </Collapsible>
 
+          <Collapsible title="12 Color Themes">
+            <ThemedText type="small">
+              Pick from 12 themes — Default, Ocean, Forest, Sunset, Midnight, Lavender, Rose, Mint, Amber, Crimson, Slate, and Candy — each with matching light and dark palettes.
+            </ThemedText>
+            <ThemedText type="small" style={{ marginTop: 6 }}>
+              Tap the <ThemedText type="smallBold">palette button</ThemedText> in the chat header to switch themes, or force light/dark brightness regardless of your device setting. Your choice is saved on-device.
+            </ThemedText>
+          </Collapsible>
+
           <Collapsible title="File-based Routing">
             <ThemedText type="small">
               This app relies on Expo Router:
