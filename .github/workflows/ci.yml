@@ -52,8 +52,11 @@ jobs:
           distribution: temurin
           java-version: ${{ env.JAVA_VERSION }}
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+      # NOTE: ubuntu-latest images ship an Android SDK already. We intentionally
+      # do NOT use android-actions/setup-android: v3 force-replaces cmdline-tools
+      # and then hard-requires the obsolete `tools` package, which no longer
+      # exists upstream, failing the step. The preinstalled sdkmanager below
+      # installs exactly what assembleRelease needs.
 
       - name: Gradle cache
         uses: gradle/actions/setup-gradle@v4
